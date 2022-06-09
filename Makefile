@@ -1,11 +1,16 @@
 NAME 		= push_swap
 
 CC 			= gcc
-FLAGS 		= -Wall -Wextra -Werror -g
+CFLAGS 		= -Wall -Wextra -Werror -g
 RM			= rm -rf
 
-SRC_F 		= main.c
+LIBFT		= ./libft/libft.a
+
+SRC_DIR		= ./src/
 SRC			= $(addprefix ./src/, $(SRC_F))
+SRC_F 		= main.c list_ft.c swap.c push.c rotate.c reverse_rotate.c
+
+OBJ_DIR		= ./obj/
 OBJ			= $(addprefix ./obj/, $(OBJ_F))
 OBJ_F		= $(SRC_F:.c=.o)
 
@@ -16,25 +21,30 @@ HEADER		= $(addprefix ./head/, $(HEADER_F))
 
 all: $(NAME)
 
-$(OBJ): $(SRC) $(HEADER) Makefile
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@ echo $(CURSIVE) $(YELLOW) " - Making Objects $<..." $(NONE)
-	@ $(CC) -c $< -o $@
+	@ $(CC) $(CFLAGS) -c $< -o $@
 	@ echo $(GREEN) " - Objects Created !" $(NONE)
 
-$(NAME): $(OBJ)
-	@ echo $(CURSIVE) $(YELLOW) " - Compiling Objects $@..." $(NONE)
-	@ $(CC) $< -o $@
+$(NAME): $(OBJ) $(LIBFT)
+	@ echo $(CURSIVE) $(YELLOW) " - Compiling Objects $<..." $(NONE)
+	@ $(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $@
 	@ echo $(GREEN) " - Compiled !" $(NONE)
 
+$(LIBFT):
+	@ echo $(CURSIVE) $(YELLOW) " - Making $(LIBFT)..." $(NONE)
+	@ make all -C ./libft
 
 clean:
 	@ echo $(RED) " - Deleting Objects: $(OBJ)" $(NONE)
 	@ $(RM) $(OBJ)
+	@ make clean -C ./libft
 	@ echo $(GREEN) " - Objects deleted !" $(NONE)
 
 fclean: clean
 	@ echo $(RED) " - Deleting $(NAME)..." $(NONE)
 	@ $(RM) $(NAME)
+	@ make fclean -C ./libft
 	@ echo $(RED) " - $(NAME) Deleted !" $(NONE)
 
 re: fclean all
