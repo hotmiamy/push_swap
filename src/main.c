@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:58:23 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/09 04:10:29 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/06/14 22:28:34 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ int	main(int argc, char **argv)
 {
 	t_head	*stack;
 
-	stack = creat_doublelst(check_args(argv, argc));
+	if (argc > 2)
+	{
+		stack = creat_doublelst(check_args(argv, argc), argc - 1);
+		normalize(stack->a, argc - 1, stack);
+		sort_stack(stack);
+	}
 	return (0);
 }

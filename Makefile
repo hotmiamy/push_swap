@@ -8,7 +8,7 @@ LIBFT		= ./libft/libft.a
 
 SRC_DIR		= ./src/
 SRC			= $(addprefix ./src/, $(SRC_F))
-SRC_F 		= main.c list_ft.c swap.c push.c rotate.c reverse_rotate.c
+SRC_F 		= main.c list_ft.c swap.c push.c rotate.c reverse_rotate.c sort_algorithm.c
 
 OBJ_DIR		= ./obj/
 OBJ			= $(addprefix ./obj/, $(OBJ_F))
@@ -28,7 +28,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 
 $(NAME): $(OBJ) $(LIBFT)
 	@ echo $(CURSIVE) $(YELLOW) " - Compiling Objects $<..." $(NONE)
-	@ $(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $@
+	@ $(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 	@ echo $(GREEN) " - Compiled !" $(NONE)
 
 $(LIBFT):

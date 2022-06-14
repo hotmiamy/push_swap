@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:57:17 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/09 04:09:38 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/06/14 22:28:21 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,19 @@
 typedef struct s_stack
 {
 	int				content;
+	int				inx;
 	struct s_stack	*next;
 	struct s_stack	*back;
 }	t_stack;
 
 typedef struct s_head
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+	int		a_size;
+	t_stack	*a;
+	int		psx_a;
+	int		b_size;
+	t_stack	*b;
+	int		psx_b;
 }	t_head;
 
 void	swap_a(t_head *head_list);
@@ -42,7 +47,10 @@ void	reverse_rotate_b(t_head *head_lst);
 void	reverse_rotate_reverse_rotate(t_head **head_lst);
 void	double_lstadd_front(t_stack **list, t_stack *new);
 void	double_lstadd_back(t_stack **list, t_stack *new);
-t_head	*creat_doublelst(int *content);
+void	normalize(t_stack *lst, int lst_size, t_head *head);
+void	sort_stack(t_head *lst);
+t_head	*creat_doublelst(int *content, int size);
 t_stack	*psw_ft_lstlast(t_stack *lst);
+int		is_sorted(t_stack *lst_a, t_stack *lst_b);
 
 #endif
