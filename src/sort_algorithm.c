@@ -6,90 +6,60 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 20:00:57 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/14 22:28:13 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/06/15 06:36:17 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../head/push_swap.h"
 
-void	normalize(t_stack *lst, int lst_size, t_head *head)
+void	sort_three(t_head *lst)
 {
-	int		inx;
-	t_stack	*aux_lst;
+	t_stack	*aux;
+	int		max_size;
 
-	inx = 1;
-	aux_lst = lst->next;
-	while (inx < lst_size)
+	aux = lst->a;
+	max_size = lst->a_size + lst->b_size;
+	lst->psx_a = 0;
+	while (is_sorted(lst->a))
 	{
-		while (aux_lst)
-		{
-			if (aux_lst->inx == 0)
-				if (lst->content > aux_lst->content)
-					lst = aux_lst;
-			aux_lst = aux_lst->next;
-		}
-		lst->inx = inx;
-		lst = head->a;
-		aux_lst = lst->next;
-		inx++;
-	}
-	while (lst)
-	{
-		if (lst->inx == 0)
-			lst->inx = inx;
-		lst = lst->next;
+		if (aux->inx == lst->sml_a && lst->psx_a == lst->a_size)
+			reverse_rotate_a(lst);
+		else if (aux->inx == max_size && lst->psx_a == 0)
+			rotate_a(lst);
+		else if ((aux->inx == max_size || aux->inx == lst->sml_a)
+			&& lst->psx_a == lst->a_size / 2)
+			swap_a(lst);
+		cant_next(&aux, lst);
 	}
 }
 
-int	is_sorted(t_stack *lst_a, t_stack *lst_b)
+void	sort_five(t_head *lst)
 {
 	t_stack	*aux;
 
-	aux = lst_a->next;
-	if (lst_b)
-		return (1);
-	while (aux)
+	aux = lst->a;
+	lst->psx_a = 0;
+	while (lst->a_size != 3)
 	{
-		if (lst_a->inx > aux->inx)
-			return (1);
-		lst_a = lst_a->next;
-		aux = aux->next;
+		if (lst->a->inx == 1 || lst->a->inx == 2)
+			push_b(lst);
+		if (aux->inx == lst->sml_a && lst->psx_a >= lst->a_size / 2)
+			reverse_rotate_a(lst);
+		else if (aux->inx == lst->sml_a && lst->psx_a <= lst->a_size / 2)
+			rotate_a(lst);
+		cant_next(&aux, lst);
 	}
-	return (0);
-}
-
-void	sort_three(t_head *lst)
-{
-	if (lst->a->inx == 1 && lst->psx_a == lst->a_size)
-		reverse_rotate_a(lst);
-	else if (lst->a->inx == lst->a_size && lst->psx_a == 0)
-		rotate_a(lst);
-	else if (lst->a->inx == lst->a_size && lst->psx_a == lst->a_size / 2)
-		swap_a(lst);
+	sort_three(lst);
+	while (lst->b)
+		push_a(lst);
 }
 
 void	sort_stack(t_head *lst)
 {
-	t_stack	*aux_lst;
-
-	lst->psx_a = 0;
-	aux_lst = lst->a;
-	if (lst->a_size == 2 && !is_sorted(lst->a, lst->b))
+	if (lst->a_size == 2 && is_sorted(lst->a))
 		swap_a(lst);
-	if (lst->a_size <= 3)
-	{
-		while (is_sorted(aux_lst, lst->b))
-		{
-			if (!lst->a->next)
-			{
-				lst->a = aux_lst;
-				lst->psx_a = 0;
-			}
-			sort_three(lst);
-			aux_lst = lst->a;
-			lst->a = lst->a->next;
-			lst->psx_a++;
-		}
-		lst->a = aux_lst;
-	}
+	if (lst->a_size <= 3 && is_sorted(lst->a))
+		sort_three(lst);
+	if (lst->a_size <= 5 && is_sorted(lst->a))
+		sort_five(lst);
 }

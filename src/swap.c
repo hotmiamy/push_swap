@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:22:20 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/14 20:18:26 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/06/15 04:27:59 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void	swap_a(t_head *head_list)
 	next_backup->next = head_list->a;
 	next_backup->back = NULL;
 	head_list->a = head_list->a->back;
+	if (head_list->psx_a == 0)
+		head_list->psx_a++;
+	else
+		head_list->psx_a--;
 	ft_printf("sa\n");
 }
 
@@ -35,6 +39,10 @@ void	swap_b(t_head *head_list)
 	next_backup->next = head_list->b;
 	next_backup->back = NULL;
 	head_list->b = head_list->b->back;
+	if (head_list->psx_b == 0)
+		head_list->psx_b++;
+	else
+		head_list->psx_b--;
 	ft_printf("sb\n");
 }
 

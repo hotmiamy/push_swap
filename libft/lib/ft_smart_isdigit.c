@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_smart_isdigit.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 18:58:23 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/15 09:02:23 by llopes-n         ###   ########.fr       */
+/*   Created: 2022/06/15 06:54:11 by llopes-n          #+#    #+#             */
+/*   Updated: 2022/06/15 07:00:35 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../head/push_swap.h"
-
-int	main(int argc, char **argv)
+int	ft_smart_isdigit(char *str)
 {
-	t_head	*stack;
-
-	stack = init(argv);
-	normalize(stack->a, argc - 1, stack);
-	sort_stack(stack);
-	return (0);
+	while (*str)
+	{
+		if (*str != '-' && *str != '+')
+			if (*str < '0' && *str > '9')
+				return (*str);
+		str++;
+	}
+	return (*str);
 }

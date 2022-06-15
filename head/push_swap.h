@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:57:17 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/14 22:28:21 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/06/15 08:46:30 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ typedef struct s_stack
 typedef struct s_head
 {
 	int		a_size;
-	t_stack	*a;
+	int		sml_a;
 	int		psx_a;
-	int		b_size;
+	t_stack	*a;
 	t_stack	*b;
+	int		b_size;
+	int		sml_b;
 	int		psx_b;
 }	t_head;
 
@@ -49,8 +51,10 @@ void	double_lstadd_front(t_stack **list, t_stack *new);
 void	double_lstadd_back(t_stack **list, t_stack *new);
 void	normalize(t_stack *lst, int lst_size, t_head *head);
 void	sort_stack(t_head *lst);
-t_head	*creat_doublelst(int *content, int size);
+void	cant_next(t_stack **next_addr, t_head *head);
+void	creat_doublelst(int *content, t_head *list);
+t_head	*init(char **argv);
 t_stack	*psw_ft_lstlast(t_stack *lst);
-int		is_sorted(t_stack *lst_a, t_stack *lst_b);
+int		is_sorted(t_stack *lst);
 
 #endif

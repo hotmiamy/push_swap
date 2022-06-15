@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 17:12:28 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/11 22:27:03 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/06/15 07:01:05 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
+int		ft_smart_isdigit(char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t len);
 int		ft_memcmp(const void *byte1, const void *byte2, size_t len);
 int		ft_atoi(const char *numstr);

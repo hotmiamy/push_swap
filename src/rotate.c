@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 01:24:41 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/14 20:18:12 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/06/15 04:16:38 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void	rotate_a(t_head *head_lst)
 	new_last_node->next = NULL;
 	head_lst->a->back = NULL;
 	double_lstadd_back(&head_lst->a, new_last_node);
+	if (head_lst->psx_a == 0)
+		head_lst->psx_a = head_lst->a_size - 1;
+	else
+		head_lst->psx_a--;
 	ft_printf("ra\n");
 }
 
@@ -33,6 +37,10 @@ void	rotate_b(t_head *head_lst)
 	new_last_node->next = NULL;
 	head_lst->b->back = NULL;
 	double_lstadd_back(&head_lst->b, new_last_node);
+	if (head_lst->psx_b == 0)
+		head_lst->psx_b = head_lst->b_size - 1;
+	else
+		head_lst->psx_b--;
 	ft_printf("rb\n");
 }
 
