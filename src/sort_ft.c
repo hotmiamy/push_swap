@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:24:52 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/15 06:25:33 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/06/16 20:15:06 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ void	normalize(t_stack *lst, int lst_size, t_head *head)
 
 	inx = 1;
 	aux_lst = lst->next;
-	while (inx < lst_size)
+	while (inx <= lst_size)
 	{
 		while (aux_lst)
 		{
+			if (lst->inx != 0)
+				while (lst->inx != 0 && lst->next)
+					lst = lst->next;
 			if (aux_lst->inx == 0)
 				if (lst->content > aux_lst->content)
 					lst = aux_lst;
@@ -32,12 +35,6 @@ void	normalize(t_stack *lst, int lst_size, t_head *head)
 		lst = head->a;
 		aux_lst = lst->next;
 		inx++;
-	}
-	while (lst)
-	{
-		if (lst->inx == 0)
-			lst->inx = inx;
-		lst = lst->next;
 	}
 }
 
@@ -56,16 +53,19 @@ int	is_sorted(t_stack *lst)
 	return (0);
 }
 
-void	cant_next(t_stack **next_addr, t_head *head)
+int	find_inx(t_stack **next_addr, t_head *head, int inx)
 {
 	if (!(*next_addr)->next)
 	{
 		*next_addr = head->a;
 		head->psx_a = 0;
 	}
-	else
+	while ((*next_addr)->inx != inx && (*next_addr)->next)
 	{
 		*next_addr = (*next_addr)->next;
 		head->psx_a++;
 	}
+	if ((*next_addr)->inx == inx)
+		return (0);
+	return (1);
 }

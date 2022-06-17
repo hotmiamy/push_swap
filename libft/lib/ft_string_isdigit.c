@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_smart_isdigit.c                                 :+:      :+:    :+:   */
+/*   ft_string_isdigit.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 06:54:11 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/15 07:00:35 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/06/17 20:12:15 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_smart_isdigit(char *str)
+int	ft_string_isdigit(char *str)
 {
-	while (*str)
+	int	inx;
+
+	inx = 0;
+	while (str[inx])
 	{
-		if (*str != '-' && *str != '+')
-			if (*str < '0' && *str > '9')
-				return (*str);
-		str++;
+		if ((str[inx] == '-' && str[inx + 1] == ' ')
+			|| (str[inx] == '+' && str[inx + 1] == ' '))
+			return (1);
+		else
+			if (str[inx] < '0' || str[inx] > '9')
+				return (str[inx]);
+		inx++;
 	}
-	return (*str);
+	return (str[inx]);
 }

@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 23:16:21 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/15 08:47:20 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/06/16 02:49:07 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,13 @@ t_stack	*psw_ft_lstlast(t_stack *lst)
 	return (lst);
 }
 
-void	creat_doublelst(int *content, t_head *list)
+void	creat_doublelst(int *content, t_head **list)
 {
 	int			inx;
 
 	inx = 0;
-	list->a = double_lstnew(content[inx++]);
-	while (inx < list->a_size)
-		double_lstadd_back(&list->a, double_lstnew(content[inx++]));
+	(*list)->a = double_lstnew(content[inx++]);
+	while (inx < (*list)->a_size)
+		double_lstadd_back(&(*list)->a, double_lstnew(content[inx++]));
+	free(content);
 }

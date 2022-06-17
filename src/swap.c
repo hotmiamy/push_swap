@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:22:20 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/15 04:27:59 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/06/16 21:51:49 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	swap_a(t_head *head_list)
 	t_stack	*next_backup;
 
 	next_backup = head_list->a->next;
+	if (head_list->a_size > 2)
+		next_backup->next->back = head_list->a;
 	head_list->a->next = head_list->a->next->next;
 	head_list->a->back = next_backup;
 	next_backup->next = head_list->a;
@@ -34,6 +36,8 @@ void	swap_b(t_head *head_list)
 	t_stack	*next_backup;
 
 	next_backup = head_list->b->next;
+	if (head_list->b_size > 2)
+		next_backup->next->back = head_list->b;
 	head_list->b->next = head_list->b->next->next;
 	head_list->b->back = next_backup;
 	next_backup->next = head_list->b;

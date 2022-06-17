@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_latoi.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/02 17:25:26 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/15 21:45:58 by llopes-n         ###   ########.fr       */
+/*   Created: 2022/06/15 18:24:20 by llopes-n          #+#    #+#             */
+/*   Updated: 2022/06/15 20:39:01 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,11 @@ static char	*ft_isspace(char *number)
 	return (number);
 }
 
-static int	ft_isoverload(int number, char lastdig, int sig)
+long int	ft_latoi(const char *numstr)
 {
-	if (number > INT_MAX / 10 || (number == INT_MAX / 10 && lastdig - '0' > 7))
-	{
-		if (sig == -1)
-			return (INT_MIN);
-		else
-			return (INT_MAX);
-	}
-	return (0);
-}
-
-int	ft_atoi(const char *numstr)
-{
-	int	index;
-	int	sig;
-	int	num_int;
+	int			index;
+	int			sig;
+	long int	num_int;
 
 	index = 0;
 	num_int = 0;
@@ -46,12 +34,8 @@ int	ft_atoi(const char *numstr)
 		sig = 1 - 2 * (numstr[index] == '-');
 		index++;
 	}
-	while (ft_isdigit(numstr[index]) != 0)
-	{
-		if (ft_isoverload(num_int, numstr[index], sig) != 0)
-			return (ft_isoverload(num_int, numstr[index], sig));
+	while (numstr[index])
 		num_int = num_int * 10 + (numstr[index++] - '0');
-	}
 	if (num_int > 0)
 		return (num_int * sig);
 	return (0);

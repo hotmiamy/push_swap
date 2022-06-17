@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:57:17 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/15 08:46:30 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/06/16 20:06:40 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,16 @@ void	double_lstadd_front(t_stack **list, t_stack *new);
 void	double_lstadd_back(t_stack **list, t_stack *new);
 void	normalize(t_stack *lst, int lst_size, t_head *head);
 void	sort_stack(t_head *lst);
-void	cant_next(t_stack **next_addr, t_head *head);
-void	creat_doublelst(int *content, t_head *list);
-t_head	*init(char **argv);
-t_stack	*psw_ft_lstlast(t_stack *lst);
+void	creat_doublelst(int *content, t_head **list);
+void	exit_clean(int *stack);
+void	psw_exit(void);
+void	free_stack(t_head **lst);
+void	free_str(char **str);
+void	free_lst_exit(t_head **lst);
+void	new_posix(t_stack *firt, t_stack *middle, t_stack *last, t_head *head);
+int		find_inx(t_stack **next_addr, t_head *head, int inx);
 int		is_sorted(t_stack *lst);
+t_head	*init(char **argv, int argc);
+t_stack	*psw_ft_lstlast(t_stack *lst);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 08:29:35 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/15 08:58:56 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/06/16 03:07:17 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../head/push_swap.h"
 
-int	*check_double(int *stack, int size)
+void	check_double(int *stack, int size, t_head *lst)
 {
 	int	inx;
 	int	jnx;
@@ -25,14 +25,13 @@ int	*check_double(int *stack, int size)
 		{
 			if (stack[inx] == stack[jnx])
 			{
-				write(2, "Error\n", 6);
-				exit(2);
+				free(stack);
+				free_lst_exit(&lst);
 			}
 			jnx++;
 		}
 		inx++;
 	}
-	return (stack);
 }
 
 int	check_size(char **argv)
@@ -41,7 +40,7 @@ int	check_size(char **argv)
 	int	jnx;
 	int	size;
 
-	inx = 1;
+	inx = 0;
 	size = 0;
 	while (argv[inx])
 	{
@@ -62,38 +61,72 @@ int	check_size(char **argv)
 	return (size);
 }
 
-int	*check_args(char **argv, t_head *lst)
+int	is_string(char **argv, t_head *lst)
 {
-	int	*array;
-	int	arr_inx;
-	int	arg_y;
+	int	inx;
+	int	jnx;
 
-	lst->a_size = check_size(argv);
-	array = malloc(lst->a_size * sizeof(int));
-	arr_inx = 0;
-	arg_y = 0;
-	while (argv[++arg_y])
+	inx = 0;
+	while (argv[inx])
 	{
-		if (ft_smart_isdigit(argv[arg_y]) != 0)
-		{
-			write(2, "Error\n", 6);
-			exit(1);
-		}
-		array[arr_inx] = ft_atoi(argv[arg_y]);
-		arr_inx++;
+		if (ft_string_isdigit(argv[inx]) != 0)
+			free_lst_exit(&lst);
+		inx++;
 	}
-	check_double(array, lst->a_size);
+	inx = 0;
+	jnx = 0;
+	while (argv[inx][jnx])
+	{
+		if (argv[inx][jnx] == ' ')
+			return (0);
+		jnx++;
+	}
+	return (1);
+}
+
+int	*fill_stack(char **argv, t_head *lst, int argc)
+{
+	int		inx;
+	int		*array;
+	char	**new_arg;
+
+	if (is_string(argv, lst) == 0)
+		new_arg = ft_split(argv[argc - 1], ' ');
+	else
+		new_arg = argv;
+	array = malloc(lst->a_size * sizeof(int));
+	inx = 0;
+	while (new_arg[inx])
+	{
+		array[inx] = (int)ft_latoi(new_arg[inx]);
+		if (array[inx] > INT_MAX && array[inx] > INT_MIN)
+			exit_clean(array);
+		inx++;
+	}
+	if (is_string(argv, lst) == 0)
+		free_str(new_arg);
+	check_double(array, lst->a_size, lst);
 	return (array);
 }
 
-t_head	*init(char **argv)
+t_head	*init(char **argv, int argc)
 {
 	t_head	*lst;
+	int		*stack;
 
 	lst = (t_head *)malloc(sizeof(t_head));
+	lst->a_size = check_size(argv + 1);
+	if (lst->a_size <= 1)
+	{
+		free(lst);
+		exit(0);
+	}
+	lst->b = NULL;
 	lst->b_size = 0;
+	lst->psx_b = 0;
 	lst->sml_a = 1;
 	lst->sml_b = 0;
-	creat_doublelst(check_args(argv, lst), lst);
+	stack = fill_stack(argv + 1, lst, argc);
+	creat_doublelst(stack, &lst);
 	return (lst);
 }
