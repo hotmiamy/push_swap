@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 08:29:35 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/16 03:07:17 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/06/22 23:25:18 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,11 @@ int	*fill_stack(char **argv, t_head *lst, int argc)
 	inx = 0;
 	while (new_arg[inx])
 	{
-		array[inx] = (int)ft_latoi(new_arg[inx]);
-		if (array[inx] > INT_MAX && array[inx] > INT_MIN)
+		if (ft_latoi(new_arg[inx]) > INT_MAX
+			|| ft_latoi(new_arg[inx]) > INT_MIN)
 			exit_clean(array);
+		else
+			array[inx] = (int)ft_latoi(new_arg[inx]);
 		inx++;
 	}
 	if (is_string(argv, lst) == 0)
@@ -125,6 +127,7 @@ t_head	*init(char **argv, int argc)
 	lst->b_size = 0;
 	lst->psx_b = 0;
 	lst->sml_a = 1;
+	lst->max_b = 0;
 	lst->sml_b = 0;
 	stack = fill_stack(argv + 1, lst, argc);
 	creat_doublelst(stack, &lst);

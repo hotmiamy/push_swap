@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_algorithm.c                                   :+:      :+:    :+:   */
+/*   sort_algo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 20:00:57 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/17 21:40:44 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/06/23 01:11:13 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../head/push_swap.h"
 
-void	sort_three(t_head *lst)
+void	three(t_head *lst)
 {
 	t_stack	*aux;
 	int		max_size;
@@ -20,7 +20,7 @@ void	sort_three(t_head *lst)
 	aux = lst->a;
 	lst->psx_a = 0;
 	max_size = lst->a_size + lst->b_size;
-	while (is_sorted(lst->a))
+	while (is_ordered(lst->a))
 	{
 		if (!aux)
 		{
@@ -39,7 +39,7 @@ void	sort_three(t_head *lst)
 	}
 }
 
-void	sort_five(t_head *lst)
+void	five(t_head *lst)
 {
 	t_stack	*aux;
 
@@ -51,7 +51,7 @@ void	sort_five(t_head *lst)
 		{
 			if (aux->inx == lst->sml_a && lst->psx_a >= lst->a_size / 2)
 				reverse_rotate_a(lst);
-			else if (aux->inx == lst->sml_a && lst->psx_a <= lst->a_size / 2)
+			else if (aux->inx == lst->sml_a && lst->psx_a < lst->a_size / 2)
 				rotate_a(lst);
 		}
 		if (lst->a->inx == lst->sml_a)
@@ -68,7 +68,7 @@ void	sort_stack(t_head *lst)
 	if (lst->a_size == 2 && is_sorted(lst->a))
 		swap_a(lst);
 	if (lst->a_size <= 3 && is_sorted(lst->a))
-		sort_three(lst);
+		three(lst);
 	if (lst->a_size <= 20 && is_sorted(lst->a))
-		sort_five(lst);
+		five(lst);
 }

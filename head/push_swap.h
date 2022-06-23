@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:57:17 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/16 20:06:40 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/06/23 03:57:37 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 
 # include <stdio.h>
 # include "../libft/libft.h"
+
+# define A 1
+# define B 0
+# define BIG 1
+# define SMALL 0
+# define BACK 1
+# define NEXT 0
+# define FRT 1
+# define LAST 0
 
 typedef struct s_stack
 {
@@ -33,6 +42,7 @@ typedef struct s_head
 	t_stack	*b;
 	int		b_size;
 	int		sml_b;
+	int		max_b;
 	int		psx_b;
 }	t_head;
 
@@ -58,8 +68,9 @@ void	free_stack(t_head **lst);
 void	free_str(char **str);
 void	free_lst_exit(t_head **lst);
 void	new_posix(t_stack *firt, t_stack *middle, t_stack *last, t_head *head);
+void	find_big_or_small(t_stack *a_b, int max_small, int big_or_small);
 int		find_inx(t_stack **next_addr, t_head *head, int inx);
-int		is_sorted(t_stack *lst);
+int		is_ordered(t_stack *lst);
 t_head	*init(char **argv, int argc);
 t_stack	*psw_ft_lstlast(t_stack *lst);
 
