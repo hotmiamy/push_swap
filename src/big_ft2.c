@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   big_ft2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 18:58:23 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/29 19:32:38 by llopes-n         ###   ########.fr       */
+/*   Created: 2022/07/10 03:46:11 by llopes-n          #+#    #+#             */
+/*   Updated: 2022/07/10 03:47:41 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../head/push_swap.h"
 
-int	main(int argc, char **argv)
+int	bigger(int stk_a, int stk_b)
 {
-	t_head	*stack;
-
-	stack = init(argv, argc - 1);
-	normalize(stack->a, stack->a_size, stack);
-	if (stack->a_size <= 7)
-		sort_stack(stack);
+	if (stk_a > stk_b)
+		return (stk_a);
 	else
-		big_sort(stack);
-	free_stack(&stack);
-	return (0);
+		return (stk_b);
+}
+
+int	number_moves(int moves_a, int moves_b, t_head *lst)
+{
+	if (lst->algo.pxs_a <= lst->a_size / 2
+		&& lst->algo.pxs_b <= lst->b_size / 2)
+		return (bigger(moves_a, moves_b));
+	if (lst->algo.pxs_a > lst->a_size / 2
+		&& lst->algo.pxs_b > lst->b_size / 2)
+		return (bigger(moves_a, moves_b));
+	else
+		return (moves_a + moves_b);
 }

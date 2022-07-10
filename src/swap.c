@@ -6,13 +6,13 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:22:20 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/16 21:51:49 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/09 20:28:21 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../head/push_swap.h"
 
-void	swap_a(t_head *head_list)
+void	swap_a(t_head *head_list, t_bool print)
 {
 	t_stack	*next_backup;
 
@@ -28,10 +28,11 @@ void	swap_a(t_head *head_list)
 		head_list->psx_a++;
 	else
 		head_list->psx_a--;
-	ft_printf("sa\n");
+	if (print == TRUE)
+		ft_printf("sa\n");
 }
 
-void	swap_b(t_head *head_list)
+void	swap_b(t_head *head_list, t_bool print)
 {
 	t_stack	*next_backup;
 
@@ -47,12 +48,13 @@ void	swap_b(t_head *head_list)
 		head_list->psx_b++;
 	else
 		head_list->psx_b--;
-	ft_printf("sb\n");
+	if (print == TRUE)
+		ft_printf("sb\n");
 }
 
 void	swap_swap(t_head **head_lst)
 {
-	swap_a((*head_lst));
-	swap_b((*head_lst));
+	swap_a((*head_lst), FALSE);
+	swap_b((*head_lst), FALSE);
 	ft_printf("ss\n");
 }

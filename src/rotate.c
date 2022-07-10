@@ -6,13 +6,13 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 01:24:41 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/15 04:16:38 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/09 20:30:15 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../head/push_swap.h"
 
-void	rotate_a(t_head *head_lst)
+void	rotate_a(t_head *head_lst, t_bool print)
 {
 	t_stack	*new_last_node;
 
@@ -25,10 +25,11 @@ void	rotate_a(t_head *head_lst)
 		head_lst->psx_a = head_lst->a_size - 1;
 	else
 		head_lst->psx_a--;
-	ft_printf("ra\n");
+	if (print == TRUE)
+		ft_printf("ra\n");
 }
 
-void	rotate_b(t_head *head_lst)
+void	rotate_b(t_head *head_lst, t_bool print)
 {
 	t_stack	*new_last_node;
 
@@ -41,12 +42,13 @@ void	rotate_b(t_head *head_lst)
 		head_lst->psx_b = head_lst->b_size - 1;
 	else
 		head_lst->psx_b--;
-	ft_printf("rb\n");
+	if (print == TRUE)
+		ft_printf("rb\n");
 }
 
 void	rotate_rotate(t_head **head_lst)
 {
-	rotate_a((*head_lst));
-	rotate_b((*head_lst));
+	rotate_a((*head_lst), FALSE);
+	rotate_b((*head_lst), FALSE);
 	ft_printf("rr\n");
 }

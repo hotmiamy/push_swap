@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 08:29:35 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/06/22 23:25:18 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/09 22:21:02 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	*fill_stack(char **argv, t_head *lst, int argc)
 	while (new_arg[inx])
 	{
 		if (ft_latoi(new_arg[inx]) > INT_MAX
-			|| ft_latoi(new_arg[inx]) > INT_MIN)
+			|| ft_latoi(new_arg[inx]) < INT_MIN)
 			exit_clean(array);
 		else
 			array[inx] = (int)ft_latoi(new_arg[inx]);
