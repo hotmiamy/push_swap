@@ -22,7 +22,7 @@ HEADER		= $(addprefix ./head/, $(HEADER_F))
 
 #COMMANDS
 
-all: $(NAME)
+all: $(OBJ_DIR) $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@ echo $(CURSIVE) $(YELLOW) " - Making Objects $<..." $(NONE)
@@ -33,6 +33,9 @@ $(NAME): $(OBJ) $(LIBFT) $(CHERCKER)
 	@ echo $(CURSIVE) $(YELLOW) " - Compiling Objects $<..." $(NONE)
 	@ $(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 	@ echo $(GREEN) " - Compiled !" $(NONE)
+
+$(OBJ_DIR):
+	@ mkdir $(OBJ_DIR)
 
 $(LIBFT):
 	@ echo $(CURSIVE) $(YELLOW) " - Making $(LIBFT)..." $(NONE)
@@ -47,7 +50,7 @@ valg:
 
 clean:
 	@ echo $(RED) " - Deleting Objects: $(OBJ)" $(NONE)
-	@ $(RM) $(OBJ)
+	@ $(RM) $(OBJ_DIR)
 	@ make clean -C ./libft
 	@ echo $(GREEN) " - Objects deleted !" $(NONE)
 
